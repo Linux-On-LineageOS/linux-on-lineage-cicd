@@ -197,7 +197,7 @@ if [ "$LOCAL_MIRROR" = true ]; then
   if [ "$INIT_MIRROR" = true ]; then
     if [ ! -d .repo ]; then
       echo ">> [$(date)] Initializing mirror repository" | tee -a "$repo_log"
-      ( yes||: ) | repo init -u https://github.com/LineageOS/mirror --mirror --no-clone-bundle -p linux --git-lfs &>> "$repo_log"
+      ( yes||: ) | repo init -u https://github.com/Linux-on-LineageOS/mirror --mirror --no-clone-bundle -p linux --git-lfs &>> "$repo_log"
     fi
   else
     echo ">> [$(date)] Initializing mirror repository disabled" | tee -a "$repo_log"
@@ -246,9 +246,9 @@ for codename in ${devices//,/ }; do
     if [ "$CALL_REPO_INIT" = true ]; then
       echo ">> [$(date)] (Re)initializing branch repository" | tee -a "$repo_log"
       if [ "$LOCAL_MIRROR" = true ]; then
-        ( yes||: ) | repo init -u https://github.com/LineageOS/android.git --reference "$MIRROR_DIR" -b "$branch" -g default,-darwin,-muppets,muppets_"${codename}" --git-lfs &>> "$repo_log"
+        ( yes||: ) | repo init -u https://github.com/Linux-on-LineageOS/android.git --reference "$MIRROR_DIR" -b "$branch" -g default,-darwin,-muppets,muppets_"${codename}" --git-lfs &>> "$repo_log"
       else
-        ( yes||: ) | repo init -u https://github.com/LineageOS/android.git -b "$branch" -g default,-darwin,-muppets,muppets_"${codename}" --git-lfs &>> "$repo_log"
+        ( yes||: ) | repo init -u https://github.com/Linux-on-LineageOS/android.git -b "$branch" -g default,-darwin,-muppets,muppets_"${codename}" --git-lfs &>> "$repo_log"
       fi
     else
       echo ">> [$(date)] Calling repo init disabled"
