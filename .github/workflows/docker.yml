@@ -6,8 +6,6 @@ on:
 
 env:
   REGISTRY: docker.io
-  # github.repository as <account>/<repo>
-  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   build:
@@ -18,6 +16,8 @@ jobs:
       packages: write
 
     steps:
+      - name: Generate correct IMAGE_NAME
+        run: echo "IMAGE_NAME=${{ secrets.DOCKERHUB_USERNAME }}/$( basename ${{ github.repository }} )" >> $GITHUB_ENV
       - name: Checkout repository
         uses: actions/checkout@v6
 
