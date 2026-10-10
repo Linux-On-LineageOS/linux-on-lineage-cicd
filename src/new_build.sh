@@ -239,11 +239,13 @@ for codename in ${devices//,/ }; do
     # Set device specific logfils
     DEBUG_LOG="$LOGS_DIR/$logsubdir/$branch-$builddate-$RELEASE_TYPE-$codename.log"
     ## Pick up TheMuppets manifest if required
-    rm -f .repo/local_manifests/proprietary.xml
+    rm -f .repo/local_manifests/proprietary.xml \
+      .repo/local_manifests/proprietary_gitlab.xml \
+      .repo/local_manifests/proprietary_github.xml
     if [ "$INCLUDE_PROPRIETARY" = true ]; then
       wget -q -O .repo/local_manifests/proprietary.xml "https://raw.githubusercontent.com/TheMuppets/manifests/$themuppets_branch/muppets.xml"
       /root/build_manifest.py --remote "https://github.com" --remotename "github_https" \
-        "https://github.com/the-muppets/manifest/raw/$themuppets_branch/muppets.xml" .repo/local_manifests/proprietary_github.xml
+        "https://github.com/TheMuppets/manifests/raw/$themuppets_branch/muppets.xml" .repo/local_manifests/proprietary_github.xml
     fi
 
     # `repo init`
